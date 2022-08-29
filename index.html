@@ -17,7 +17,7 @@
   <script>
     window.$docsify = {
       name: '',
-      repo: 'https://github.com/tonyddg/notebook',
+      repo: 'https://github.com/tonyddg/SpecializedCourseNote',
       //加载目录(_sidebar.md)
       loadSidebar: true,
       //文章标题加载层数
@@ -29,6 +29,22 @@
 
       //开启封面 _coverpage.md
       coverpage: true,
+
+      //适配Markdown的====高亮语法
+      plugins: [
+      function(hook, vm) {
+        hook.beforeEach(function (html) {
+            
+            let res = html.match(/==(.+?)==/g);
+            if(res)
+            {
+              for (var i = 0; i < res.length; i++) {
+                html = html.replace(res[i],`<mark>`+res[i].replace(/==/g,"")+`</mark>`);
+              }              
+            }
+            return html;
+        })
+      },],
     }
   </script>
   <!-- Docsify v4 -->
